@@ -22,7 +22,7 @@ public class CustomUserAuthDetailService implements UserDetailsService{
     }
 
 
-   
+   @Override
     public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException{
         UserAuth users = userAuthRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail)
             .orElseThrow(() ->

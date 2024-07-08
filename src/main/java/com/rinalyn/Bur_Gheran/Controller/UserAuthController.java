@@ -39,7 +39,7 @@ public class UserAuthController {
     public ResponseEntity<?> register(@RequestBody RegistrationRequest registrationRequest){
 
         //check if username exist in DB
-        if(userRepository.existedByUsername(registrationRequest.getUsername())){
+        if(userRepository.existsByUsername(registrationRequest.getUsername())){
             return new ResponseEntity<>("Username is already taken!", HttpStatus.BAD_REQUEST);
         }
 
