@@ -4,7 +4,6 @@ package com.rinalyn.Bur_Gheran.Config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -41,7 +40,7 @@ public class SecurityConfig {
 
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests((authorize) ->
-                      authorize.requestMatchers(HttpMethod.GET, "/api/v1/**").permitAll()
+                      authorize.requestMatchers("/api/v1/**").permitAll()
                             .requestMatchers("/api/v1/auth/**").permitAll()
                             .anyRequest().authenticated()
                 );

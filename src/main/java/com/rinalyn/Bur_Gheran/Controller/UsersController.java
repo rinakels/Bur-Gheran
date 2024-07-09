@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rinalyn.Bur_Gheran.Model.Users;
@@ -16,6 +17,7 @@ import com.rinalyn.Bur_Gheran.Repository.UsersRepository;
 
 
 @RestController
+@RequestMapping("/api/vi/users")
 public class UsersController {
 
     UsersRepository repo;
@@ -27,14 +29,14 @@ public class UsersController {
     //http://127.0.0.1/users
     //Get all Users
    
-    @GetMapping("/users")
+    @GetMapping("/all")
     public List<Users> getusers(){
         return repo.findAll();
     }
     
 
     //http:127.0.0.1:8080/users/2
-    @GetMapping("/users/{id}")
+    @GetMapping("/{id}")
     public Users getUsersById(@PathVariable Long id){
         return repo.findById(id)
         .orElseThrow(()-> new UsersNotFoundException(id));
@@ -42,7 +44,7 @@ public class UsersController {
 
 
     //http:127.0.0.1:8080/users/new
-    @PostMapping("/users/new")
+    @PostMapping("/new")
     public String addUsers(@RequestBody Users newUsers){
         repo.save(newUsers);
         return "A new users is added. Yey!";
@@ -52,7 +54,7 @@ public class UsersController {
     //UPDATE ENDPOINTS
     //http://127.0.0.1:8080/users/edit/1
 
-    @PutMapping("/users/edit/{id}")
+    @PutMapping("/edit/{id}")
     public Users updateUsers(@PathVariable Long id, @RequestBody Users newUsers){
        return repo.findById(id)
        .map(users ->{
@@ -67,7 +69,7 @@ public class UsersController {
 
     //DELETE ENDPOINTS
     //http://127.0.0.1:8080/users/delete/1
-    @DeleteMapping("/users/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public String deleteUsers(@PathVariable Long id){
         repo.deleteById(id);
         return "A users is Deleted!";
